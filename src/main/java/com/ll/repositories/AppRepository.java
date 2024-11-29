@@ -1,5 +1,15 @@
 package com.ll.repositories;
 
-public class AppRepository {
+import java.util.Optional;
 
+public interface AppRepository {
+    void add(appEntity entity);
+
+    List<appEntity> findAll();
+
+    boolean removeById(int id);
+
+    Optional<appEntity> findById(int id);
+
+    void update(appEntity entity);
 }

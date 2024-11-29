@@ -23,15 +23,15 @@ public class appController {
         System.out.println("Enter: ");
         String content = sc.nextLine();
 
-        Entity entity = appService.create(content);
+        appEntity entity = appService.create(content);
 
         System.out.println("created %d content.".formatted(entity.getId()));
     }
 
     public void read() {
-        List<Entity> contents = appService.findAll();
+        List<appEntity> contents = appService.findAll();
 
-        for (Entity element : contents) {
+        for (appEntity element : contents) {
             System.out.println(element.getId() + element.getContent);
         }
     }
@@ -39,19 +39,19 @@ public class appController {
     public void update(String cmd) {
         int id = Integer.parseInt(cmd);
 
-        Optional<Entity> revisingContent = appService.findId(id);
+        Optional<appEntity> revisingContent = appService.findId(id);
 
         if (revisingContent.isEmpty()) {
             System.out.println(id + " not exist.");
             return;
         }
 
-        Entity foundedContent = revisingContent.get();
+        appEntity foundedContent = revisingContent.get();
         System.out.println("origin content");
         System.out.println("Enter content: ");
         String content = sc.nextLine();
 
-        appSerive.update(foundedContent, content);
+        appService.update(foundedContent, content);
 
         System.out.println("revised content is finished.");
     }
