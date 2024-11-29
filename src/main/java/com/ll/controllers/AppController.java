@@ -1,15 +1,17 @@
 package com.ll.controllers;
 
+import com.ll.entities.AppEntity;
 import com.ll.services.AppService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class appController {
+public class AppController {
     public AppService appService;
     public Scanner sc;
 
-    public appController(Scanner sc) {
+    public AppController(Scanner sc) {
         this.appService = new AppService();
         this.sc = sc;
     }
@@ -23,30 +25,30 @@ public class appController {
         System.out.println("Enter: ");
         String content = sc.nextLine();
 
-        appEntity entity = appService.create(content);
+        AppEntity entity = appService.create(content);
 
         System.out.println("created %d content.".formatted(entity.getId()));
     }
 
     public void read() {
-        List<appEntity> contents = appService.findAll();
+        List<AppEntity> entities = appService.findAll();
 
-        for (appEntity element : contents) {
-            System.out.println(element.getId() + element.getContent);
+        for (AppEntity entity : entities) {
+            System.out.println(entity.getId() + entity.getContent());
         }
     }
 
     public void update(String cmd) {
         int id = Integer.parseInt(cmd);
 
-        Optional<appEntity> revisingContent = appService.findId(id);
+        Optional<AppEntity> revisingContent = appService.findById(id);
 
         if (revisingContent.isEmpty()) {
             System.out.println(id + " not exist.");
             return;
         }
 
-        appEntity foundedContent = revisingContent.get();
+        AppEntity foundedContent = revisingContent.get();
         System.out.println("origin content");
         System.out.println("Enter content: ");
         String content = sc.nextLine();

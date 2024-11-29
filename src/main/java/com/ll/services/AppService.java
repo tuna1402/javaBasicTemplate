@@ -1,25 +1,26 @@
 package com.ll.services;
 
-import com.ll.App;
-import com.ll.entities.appEntity;
+import com.ll.entities.AppEntity;
+import com.ll.repositories.AppMemoryRepository;
 import com.ll.repositories.AppRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AppService {
     public AppRepository appRepository;
 
     public AppService() {
-        this.appRepository = new AppRepository();
+        this.appRepository = new AppMemoryRepository();
     }
 
-    public appEntity create(String content) {
-        appEntity entity = new appEntity(0, content);
+    public AppEntity create(String content) {
+        AppEntity entity = new AppEntity(0, content);
         appRepository.add(entity);
         return entity;
     }
 
-    public List<appEntity> findAll() {
+    public List<AppEntity> findAll() {
         return appRepository.findAll();
     }
 
@@ -27,11 +28,11 @@ public class AppService {
         return appRepository.removeById(id);
     }
 
-    public Optional<appEntity> findById(int id) {
+    public Optional<AppEntity> findById(int id) {
         return appRepository.findById(id);
     }
 
-    public void update(appEntity entity, String content) {
+    public void update(AppEntity entity, String content) {
         entity.setContent(content);
 
         appRepository.update(entity);

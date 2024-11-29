@@ -1,15 +1,18 @@
 package com.ll.repositories;
 
+import com.ll.entities.AppEntity;
+
+import java.util.List;
 import java.util.Optional;
 
 public interface AppRepository {
-    void add(appEntity entity);
+    void add(AppEntity entity);
 
-    List<appEntity> findAll();
+    List<AppEntity> findAll();
 
     boolean removeById(int id);
 
-    Optional<appEntity> findById(int id);
+    Optional<AppEntity> findById(int id);
 
-    void update(appEntity entity);
+    void update(AppEntity entity);
 }

@@ -1,18 +1,18 @@
 package com.ll;
 
 import com.ll.controllers.SystemController;
-import com.ll.controllers.appController;
+import com.ll.controllers.AppController;
 
 import java.util.Scanner;
 
 public class App {
     public SystemController systemController;
-    public appController controller;
+    public AppController appController;
     public Scanner sc;
 
     public App() {
         sc = new Scanner(System.in);
-        systemcontroller = new SysmtemController();
+        systemController = new SystemController();
         appController = new AppController(sc);
     }
 
@@ -20,20 +20,26 @@ public class App {
         System.out.println("App start");
         String cmd = sc.nextLine();
 
-        controller.sampleData();
+        appController.sampleData();
 
+        label:
         while(true) {
-            if (cmd.equals("Exit")) {
-                systemController.appExit();
-                break;
-            } else if (cmd.equals("Create")) {
-                appController.create();
-            } else if (cmd.equals("Read")) {
-                appController.read();
-            } else if (cmd.equals("Update")) {
-                appController.update(cmd);
-            } else if (cmd.equals("Delete")) {
-                appController.delete();
+            switch (cmd) {
+                case "Exit":
+                    systemController.appExit();
+                    break label;
+                case "Create":
+                    appController.create();
+                    break;
+                case "Read":
+                    appController.read();
+                    break;
+                case "Update":
+                    appController.update(cmd);
+                    break;
+                case "Delete":
+                    appController.delete(cmd);
+                    break;
             }
         }
         sc.close();
